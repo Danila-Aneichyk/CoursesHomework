@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3555983760417175357}
   - component: {fileID: 3951101991959698325}
   - component: {fileID: 201757604187811891}
+  - component: {fileID: 8579577722237455744}
+  - component: {fileID: 1115509981777735810}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -116,6 +118,33 @@ MonoBehaviour:
   speed: 1
   blueVFX: {fileID: 2619809868877078830}
   redVFX: {fileID: 1820983718236820478}
+--- !u!114 &8579577722237455744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743036428890533592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b457cb14900a49eba37fd67bbc6b0d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletLinearMovement
+--- !u!114 &1115509981777735810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743036428890533592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abbf012abdc4f009c0acf46a7bb7107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletViewController
+  _blueVFX: {fileID: 2619809868877078830}
+  _redVFX: {fileID: 1820983718236820478}
+  _config: {fileID: 11400000, guid: f2107b212e6a245009f8ae9313cc81bb, type: 2}
 --- !u!1 &3276060438849189846
 GameObject:
   m_ObjectHideFlags: 0

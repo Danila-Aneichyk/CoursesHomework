@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 namespace Game
 {
-    // +
     public sealed class EnemyOrchestrator : MonoBehaviour, IEnemyDespawner
     {
         [Header("Spawn")]
@@ -22,12 +21,12 @@ namespace Game
         
         [Header("Pool")]
         [SerializeField]
-        private Enemy _prefab;
+        private EnemyShip _prefab;
 
         [SerializeField]
         private Transform _container;
         
-        private readonly Queue<Enemy> _pool = new();
+        private readonly Queue<EnemyShip> _pool = new();
 
         [Header("Target")]
         [SerializeField]
@@ -62,29 +61,29 @@ namespace Game
         
         private void Start()
         {
-            this.ResetSpawnCooldown();
+            ResetSpawnCooldown();
         }
 
         private void FixedUpdate()
         {
             float time = Time.fixedTime;
-            if (time - _spawnTime < _spawnCooldown || _player.currentHealth <= 0)
+            if (time - _spawnTime < _spawnCooldown || _player.CurrentHp <= 0)
                 return;
             
-            if (_pool.TryDequeue(out Enemy enemy))
+            if (_pool.TryDequeue(out EnemyShip enemy))
                 enemy.gameObject.SetActive(true);
             else
                 enemy = Instantiate(_prefab, _container);
 
-            enemy.transform.position = this.NextSpawnPosition();
-            enemy.destination = this.NextDestination();
-            enemy.currentHealth = enemy.config.Health;
+            enemy.transform.position = NextSpawnPosition();
+            enemy.destination = NextDestination();
+            enemy.ResetHealth();
 
             enemy.target = _player;
             enemy.SetDespawner(this);
-            enemy.OnFire += this.OnFire;
+            enemy.OnFire += OnFire;
                 
-            this.ResetSpawnCooldown();
+            ResetSpawnCooldown();
         }
 
         private void ResetSpawnCooldown()
@@ -93,18 +92,18 @@ namespace Game
             _spawnTime = Time.fixedTime;
         }
 
-        public void Despawn(Enemy enemy)
+        public void Despawn(EnemyShip enemyShip)
         {
             _destroyedEnemies++;
             _scoreView.SetValue(_destroyedEnemies);
-            this.StartCoroutine(DespawnInNextFrame(enemy));
+            StartCoroutine(DespawnInNextFrame(enemyShip));
         }
 
-        private IEnumerator DespawnInNextFrame(Enemy enemy)
+        private IEnumerator DespawnInNextFrame(EnemyShip enemyShip)
         {
             yield return null;
-            enemy.gameObject.SetActive(false);
-            _pool.Enqueue(enemy);
+            enemyShip.gameObject.SetActive(false);
+            _pool.Enqueue(enemyShip);
         }
         
         private void OnFire(ShipController enemy)

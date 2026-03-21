@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 659620479434099170}
   - component: {fileID: 102605417607457000}
   - component: {fileID: 4560017961611896118}
+  - component: {fileID: 8276726177202966188}
+  - component: {fileID: 4577901948739111330}
   m_Layer: 11
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -113,20 +115,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 342eb63e507d644daae6ffc27bd8fc71, type: 2}
-  currentHealth: 2
+  _shipHealthController: {fileID: 0}
   firePoint: {fileID: 3195880656587174614}
   bulletSpeed: 3
   bulletDamage: 1
   _motor:
     _rigidbody: {fileID: 659620479434099170}
     _speed: 2
-  _renderer: {fileID: 1333951631294404335}
-  _viewTransform: {fileID: 2570692159425164225}
-  _audioSource: {fileID: 4560017961611896118}
-  _viewConfig: {fileID: 11400000, guid: f6ecf0b3d1d004b3893cc42c64995303, type: 2}
-  _fireVFX: {fileID: 1792961037914348205}
-  _fireSFX: {fileID: 0}
-  _damageSFX: {fileID: 0}
   target: {fileID: 0}
   destination: {x: 0, y: 0}
   _fireCooldown: 1.25
@@ -228,6 +223,40 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8276726177202966188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de363358fc1b41eab1392b2e6015cae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ShipViewController
+  _renderer: {fileID: 1333951631294404335}
+  _viewTransform: {fileID: 3470145497817149085}
+  _audioSource: {fileID: 4560017961611896118}
+  _config: {fileID: 11400000, guid: f6ecf0b3d1d004b3893cc42c64995303, type: 2}
+  _fireVFX: {fileID: 1792961037914348205}
+  _fireSFX: {fileID: 8300000, guid: a6ed263e807940048af5295b8f7144d3, type: 3}
+  _damageSFX: {fileID: 8300000, guid: 59ebcdadc589f33428c119232d3421b9, type: 3}
+--- !u!114 &4577901948739111330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b4e7cc954445de8f7979cda59fa448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ShipHealthController
+  _shipControllerSO: {fileID: 11400000, guid: 342eb63e507d644daae6ffc27bd8fc71, type: 2}
+  _startHp: 0
+  _maxHp: 0
 --- !u!1 &1074127585690423075
 GameObject:
   m_ObjectHideFlags: 0

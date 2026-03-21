@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class Enemy : ShipController
+    public sealed class EnemyShip : ShipController
     {
         [Header("Enemy")]
         public ShipController target;
@@ -31,7 +31,7 @@ namespace Game
         {
             base.FixedUpdate();
 
-            if (this.currentHealth <= 0 || this.target == null || this.target.currentHealth <= 0)
+            if (HealthController.CurrentHp <= 0 || this.target == null || target.CurrentHp <= 0)
                 return;
 
             Vector2 distance = destination - (Vector2) this.transform.position;
