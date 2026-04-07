@@ -9,10 +9,8 @@ namespace Game
         public event Action<BulletData, Collider2D> OnTriggerEntered;
 
         public TeamType team = TeamType.None;
-        public Vector2 direction;
 
         public int damage;
-        public float speed;
         public GameObject blueVFX;
         public GameObject redVFX;
 

@@ -2,24 +2,24 @@
 
 namespace Game
 {
-    public class BulletLinearMovement : MonoBehaviour, IMovable
+    public sealed class BulletLinearMovement : MonoBehaviour
     {
-        private BulletData _bulletData;
+        public Vector2 Direction => _direction;
+        public float Speed => _speed;
 
-        private void Awake()
+        private Vector2 _direction;
+        private float _speed;
+
+        public void Setup(Vector2 direction, float speed)
         {
-            _bulletData = gameObject.GetComponent<BulletData>();
+            _direction = direction.normalized;
+            _speed = speed;
         }
 
         private void FixedUpdate()
         {
-            Move();
-        }
-
-        public void Move()
-        {
-            Vector3 moveStep = _bulletData.direction * _bulletData.speed * Time.fixedDeltaTime;
-            _bulletData.transform.position += moveStep;
+            Vector3 moveStep = (Vector3)(_direction * _speed * Time.fixedDeltaTime);
+            transform.position += moveStep;
         }
     }
 }

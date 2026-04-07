@@ -38,11 +38,12 @@ namespace Game
         public void Spawn(Vector2 position, Vector2 direction, float speed, int damage, TeamType team)
         {
             BulletData bullet = GetBulletData();
-
-            bullet.direction = direction;
-            bullet.speed = speed;
+            
             bullet.damage = damage;
             bullet.team = team;
+            
+            BulletLinearMovement movement = bullet.GetComponent<BulletLinearMovement>();
+            movement.Setup(direction, speed);
 
             bullet.transform.position = position;
             bullet.transform.rotation =
