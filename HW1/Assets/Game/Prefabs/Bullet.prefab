@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 201757604187811891}
   - component: {fileID: 8579577722237455744}
   - component: {fileID: 1115509981777735810}
+  - component: {fileID: -7850430579428639427}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -113,9 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  direction: {x: 0, y: 0}
   damage: 1
-  speed: 1
   blueVFX: {fileID: 2619809868877078830}
   redVFX: {fileID: 1820983718236820478}
 --- !u!114 &8579577722237455744
@@ -145,6 +144,18 @@ MonoBehaviour:
   _blueVFX: {fileID: 2619809868877078830}
   _redVFX: {fileID: 1820983718236820478}
   _config: {fileID: 11400000, guid: f2107b212e6a245009f8ae9313cc81bb, type: 2}
+--- !u!114 &-7850430579428639427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743036428890533592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909f286bf06f4c7ca4e1e7d40ef4656a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletDamage
 --- !u!1 &3276060438849189846
 GameObject:
   m_ObjectHideFlags: 0

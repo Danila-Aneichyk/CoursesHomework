@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class CustomPool<T> where T : MonoBehaviour
+    public class CustomPool<T> : MonoBehaviour where T : MonoBehaviour
     {
         private T _prefab;
         private List<T> _objects;

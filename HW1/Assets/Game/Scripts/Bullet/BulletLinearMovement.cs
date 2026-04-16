@@ -14,6 +14,7 @@ namespace Game
         {
             _direction = direction.normalized;
             _speed = speed;
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, _direction);
         }
 
         private void FixedUpdate()

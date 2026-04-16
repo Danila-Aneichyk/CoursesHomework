@@ -518,12 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba1c9bb6cda40859c2a722f818fdc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.UIController
-  _gameOverView: {fileID: 1375492023}
-  _scoreView: {fileID: 895558708}
-  _healthView: {fileID: 1243470931}
-  _enemyManager: {fileID: 562298205}
-  _player: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!1 &196756140
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,6 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 363245576}
   - component: {fileID: 363245577}
+  - component: {fileID: 363245578}
   m_Layer: 0
   m_Name: <BulletSystem>
   m_TagString: Untagged
@@ -599,10 +594,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bd15923a144ffbab0333dc6e74e641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPool: {fileID: 363245578}
+  _levelBounds: {fileID: 2572952653776768186}
+--- !u!114 &363245578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363245575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e376a7655e804829bea97c690a71d162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletPool
   _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
   _container: {fileID: 363245576}
-  _configView: {fileID: 11400000, guid: f2107b212e6a245009f8ae9313cc81bb, type: 2}
-  _levelBounds: {fileID: 2572952653776768186}
+  _initialPoolSizeAmount: 10
 --- !u!1 &404085825
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,21 +3150,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 739865810}
     m_Modifications:
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      propertyPath: _healthView
-      value: 
-      objectReference: {fileID: 1243470931}
-    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _playerArea
       value: 
       objectReference: {fileID: 1498479408}
-    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      propertyPath: _cameraShaker
-      value: 
-      objectReference: {fileID: 519420034}
-    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      propertyPath: _gameOverView
-      value: 
-      objectReference: {fileID: 1375492023}
     - target: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: m_Name
       value: <Player>

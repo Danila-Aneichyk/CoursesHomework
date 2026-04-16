@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 328849090417711829}
   - component: {fileID: 5764623087822381827}
   - component: {fileID: 6936070304904643748}
-  - component: {fileID: 1402387096095636416}
+  - component: {fileID: 6260056144282020532}
+  - component: {fileID: -416969982991812078}
+  - component: {fileID: -4416334951565471196}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -255,7 +257,7 @@ MonoBehaviour:
   _shipControllerSO: {fileID: 11400000, guid: 0b9a4576e5f0a4babb44b3c82e6480d0, type: 2}
   _startHp: 0
   _maxHp: 0
---- !u!114 &1402387096095636416
+--- !u!114 &6260056144282020532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,12 +266,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 4109394316656653739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d9b90ac66dd4f8381d33f2296de217f, type: 3}
+  m_Script: {fileID: 11500000, guid: ffc9574936654e568b1553bf424a36b7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game::Game.PlayerShipView
-  _cameraShaker: {fileID: 0}
-  _gameOverView: {fileID: 0}
-  _healthView: {fileID: 0}
+  m_EditorClassIdentifier: Game::Game.PlayerCameraPresenter
+--- !u!114 &-416969982991812078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109394316656653739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c471f1ae76f44ff29bace41c63cf072f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.PlayerGameOverPresenter
+--- !u!114 &-4416334951565471196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109394316656653739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14397861ea204197a8451fc5bc442983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.PlayerHealthPresenter
 --- !u!1 &7932017922939402051
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Modules.Utils;
 using UnityEngine;
@@ -8,27 +7,11 @@ namespace Game
     // +
     public sealed class BulletWorldGO : MonoBehaviour
     {
-        [SerializeField]
-        private BulletData _prefab;
+        [SerializeField] private BulletPool _bulletPool;
 
-        [SerializeField]
-        private Transform _container;
-
-        [SerializeField]
-        private BulletViewConfig _configView;
-
-        [SerializeField]
-        private TransformBounds _levelBounds;
-
-        private readonly Stack<BulletData> _pool = new();
-        private readonly List<BulletData> _bullets = new();
-
-        private int _initialPoolSizeAmount = 10;
-
-        private void Awake()
-        {
-            InstantiateInitialPull();
-        }
+        [SerializeField] private TransformBounds _levelBounds;
+        
+        private readonly List<BulletData> _activeBullets = new();
 
         private void FixedUpdate()
         {
@@ -37,24 +20,22 @@ namespace Game
 
         public void Spawn(Vector2 position, Vector2 direction, float speed, int damage, TeamType team)
         {
-            BulletData bullet = GetBulletData();
-            
-            bullet.damage = damage;
+            BulletData bullet = _bulletPool.GetBulletData();
+
+            bullet.transform.position = position;
             bullet.team = team;
-            
+
             BulletLinearMovement movement = bullet.GetComponent<BulletLinearMovement>();
             movement.Setup(direction, speed);
 
-            bullet.transform.position = position;
-            bullet.transform.rotation =
-                Quaternion.LookRotation(direction, Vector3.forward);
+            BulletDamage bulletDamage = bullet.GetComponent<BulletDamage>();
+            bulletDamage.Setup(damage);
 
-            bullet.GetComponent<BulletViewController>()
-                .Setup(team);
+            bullet.GetComponent<BulletViewController>().Setup(team);
 
             bullet.OnTriggerEntered += OnTriggerEntered;
-            
-            _bullets.Add(bullet);
+
+            _activeBullets.Add(bullet);
         }
 
         private void OnTriggerEntered(BulletData bullet, Collider2D other)
@@ -65,39 +46,20 @@ namespace Game
             if (damageable.Team == bullet.team)
                 return;
 
-            damageable.ApplyDamage(bullet.damage);
+            BulletDamage bulletDamage = bullet.GetComponent<BulletDamage>();
+            damageable.ApplyDamage(bulletDamage.Value);
 
             ReturnToPool(bullet);
             
             bullet.GetComponent<BulletViewController>()
                 .SpawnExplosion(bullet.transform.position);
         }
-
-        private void ReturnToPool(BulletData bullet)
-        {
-            bullet.OnTriggerEntered -= this.OnTriggerEntered;
-
-            _bullets.Remove(bullet);
-
-            bullet.gameObject.SetActive(false);
-            _pool.Push(bullet);
-        }
-
-        private void InstantiateInitialPull()
-        {
-            for (var i = 0; i < _initialPoolSizeAmount; i++)
-            {
-                BulletData bullet = Instantiate(_prefab, _container);
-                bullet.gameObject.SetActive(false);
-                _pool.Push(bullet);
-            }
-        }
-
+        
         private void IsBulletInBounds()
         {
-            for (int i = _bullets.Count - 1; i >= 0; i--)
+            for (int i = _activeBullets.Count - 1; i >= 0; i--)
             {
-                BulletData bullet = _bullets[i];
+                BulletData bullet = _activeBullets[i];
 
                 if (!_levelBounds.InBounds(bullet.transform.position))
                 {
@@ -105,16 +67,13 @@ namespace Game
                 }
             }
         }
-
-        private BulletData GetBulletData()
+        
+        private void ReturnToPool(BulletData bullet)
         {
-            if (_pool.TryPop(out BulletData bullet))
-            {
-                bullet.gameObject.SetActive(true);
-                return bullet;
-            }
-    
-            return Instantiate(_prefab, _container);
+            bullet.OnTriggerEntered -= OnTriggerEntered;
+
+            _activeBullets.Remove(bullet);
+            _bulletPool.Return(bullet);
         }
     }
 }
